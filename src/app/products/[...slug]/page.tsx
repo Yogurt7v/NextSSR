@@ -9,7 +9,6 @@ export default function ProductName() {
   const pathname = usePathname();
   const search = useSearchParams();
   const links = pathname.split('/');
-  console.log(search);
   return (
     <div>
       Product Name
