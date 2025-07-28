@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { GetJoke } from './lib/joke';
 // import { GetServerSideProps } from 'next';
 
@@ -12,10 +13,19 @@ export default async function Home() {
 }
 
 // export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   const id = ctx.query.id;
+//   const res = await fetch(`http://..../${id}`);
+//   const data = await res.json();
+
+// if (data.message === 'not found') {
+//   return {
+//     notFound: true,
+//   };
+// }
 //   return {
 //     props: {
-//       a: 1,
-//       b: 2,
+//       singleData: data,
 //     },
 //   };
-// }; не работает в app router. устаревшая технология
+// };
+// не работает в app router. устаревшая технология
