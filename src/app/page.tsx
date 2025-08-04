@@ -13,20 +13,20 @@ export default async function Home() {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  const id = ctx.params?.id;
-  const res = await fetch(`http://..../${id}`);
-  const data = await res.json();
+// export const getStaticProps: GetStaticProps = async (ctx) => {
+//   const id = ctx.params?.id;
+//   const res = await fetch(`http://..../${id}`);
+//   const data = await res.json();
 
-  if (data.message === 'not found') {
-    return {
-      notFound: true,
-    };
-  }
-  return {
-    props: {
-      singleData: data,
-    },
-  };
-};
+//   if (data.message === 'not found') {
+//     return {
+//       notFound: true,
+//     };
+//   }
+//   return {
+//     props: {
+//       singleData: data,
+//     },
+//   };
+// };
 // не работает в app router. устаревшая технология
