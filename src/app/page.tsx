@@ -1,32 +1,17 @@
-import { notFound } from 'next/navigation';
-import { GetJoke } from './lib/joke';
-import { GetStaticProps } from 'next';
-// import { GetServerSideProps } from 'next';
+import { getAllUsers } from '@/lib/users';
+import { Suspense } from 'react';
 
 export default async function Home() {
-  const joke = await GetJoke();
+  const data = await getAllUsers();
+
   return (
     <>
-      <div>Test</div>
-      <p>{joke.joke}</p>
+      {/* <div>Test</div> */}
+      <Suspense fallback={<div>Loading</div>}>
+        {data.map((item, index) => (
+          <p key={index}>{item.name}</p>
+        ))}
+      </Suspense>
     </>
   );
 }
-
-// export const getStaticProps: GetStaticProps = async (ctx) => {
-//   const id = ctx.params?.id;
-//   const res = await fetch(`http://..../${id}`);
-//   const data = await res.json();
-
-//   if (data.message === 'not found') {
-//     return {
-//       notFound: true,
-//     };
-//   }
-//   return {
-//     props: {
-//       singleData: data,
-//     },
-//   };
-// };
-// не работает в app router. устаревшая технология
