@@ -1,14 +1,17 @@
-import prisma from '@/server/db';
+import { getAllUsers } from '@/lib/users';
+import { Suspense } from 'react';
 
 export default async function Home() {
-  const data = await prisma.user.findMany();
+  const data = await getAllUsers();
 
   return (
     <>
       {/* <div>Test</div> */}
-      {data.map((item, index) => (
-        <p key={index}>{item.name}</p>
-      ))}
+      <Suspense fallback={<div>Loading</div>}>
+        {data.map((item, index) => (
+          <p key={index}>{item.name}</p>
+        ))}
+      </Suspense>
     </>
   );
 }
