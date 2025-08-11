@@ -14,7 +14,7 @@ export const appRouter = router({
       // Здесь может быть запрос к БД или внешнему API
       return {
         id: input.id,
-        name: 'John Doe',
+        name: 'Random User',
         email: 'john@example.com',
       };
     }),
