@@ -7,6 +7,17 @@ export const appRouter = router({
       text: `Hello ${opts.input.text ?? 'world'}`,
     };
   }),
+
+  getUser: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      // Здесь может быть запрос к БД или внешнему API
+      return {
+        id: input.id,
+        name: 'John Doe',
+        email: 'john@example.com',
+      };
+    }),
 });
 
 export type AppRouter = typeof appRouter;
