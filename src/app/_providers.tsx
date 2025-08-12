@@ -1,4 +1,3 @@
-// app/_trpc/Provider.tsx
 'use client';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -11,10 +10,10 @@ export const trpc = createTRPCReact<AppRouter>();
 
 export function TRPCReactProvider({
   children,
-  headers,
+  headersPromise,
 }: {
   children: React.ReactNode;
-  headers?: Headers;
+  headersPromise?: Promise<Headers>;
 }) {
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
@@ -23,10 +22,18 @@ export function TRPCReactProvider({
         loggerLink(),
         httpBatchLink({
           url: '/api/trpc',
-          headers() {
-            const heads = new Map(headers);
-            heads.set('x-trpc-source', 'react');
-            return Object.fromEntries(heads);
+          async headers() {
+            const headers = new Headers();
+            headers.set('x-trpc-source', 'react');
+
+            if (headersPromise) {
+              const awaitedHeaders = await headersPromise;
+              awaitedHeaders.forEach((value, key) => {
+                headers.set(key, value);
+              });
+            }
+
+            return Object.fromEntries(headers);
           },
         }),
       ],

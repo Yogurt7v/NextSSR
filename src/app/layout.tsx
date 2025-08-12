@@ -3,6 +3,7 @@ import type { AppRouter } from '../server/trpc/routers';
 import type { Metadata } from 'next';
 import './globals.css';
 import { TRPCReactProvider } from './_providers';
+import { headers } from 'next/headers';
 
 export const metadata: Metadata = {
   title: 'MetaData test',
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider headersPromise={Promise.resolve(headers())}>
+          {children}
+        </TRPCReactProvider>
       </body>
     </html>
   );
