@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { router, publicProcedure } from '../index';
+import { eventRouter } from './event';
 
 export const appRouter = router({
   hello: publicProcedure.input(z.object({ text: z.string() })).query((opts) => {
@@ -18,6 +19,7 @@ export const appRouter = router({
         email: 'john@example.com',
       };
     }),
+  event: eventRouter,
 });
 
 export type AppRouter = typeof appRouter;

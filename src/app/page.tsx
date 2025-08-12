@@ -1,6 +1,7 @@
 import { getAllUsers } from '@/lib/users';
 import { Suspense } from 'react';
 import { Greeting } from './Greeting';
+import { EventCard } from '@/components/EventCard';
 
 export default async function Home() {
   const data = await getAllUsers();
@@ -14,6 +15,12 @@ export default async function Home() {
       </Suspense>
       <div>
         <Greeting />
+        <EventCard
+          date="now"
+          description="Будет весело"
+          location="лучшее место на земле"
+          title="Встреча"
+        />
       </div>
     </>
   );
