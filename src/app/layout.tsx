@@ -1,8 +1,8 @@
 import { createTRPCReact } from '@trpc/react-query';
 import type { AppRouter } from '../server/trpc/routers';
-import { Providers } from './_providers';
 import type { Metadata } from 'next';
 import './globals.css';
+import { TRPCReactProvider } from './_providers';
 
 export const metadata: Metadata = {
   title: 'MetaData test',
@@ -17,9 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html>
       <body>
-        <Providers>{children}</Providers>
+        <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>
   );
