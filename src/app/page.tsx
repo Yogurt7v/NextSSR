@@ -2,6 +2,7 @@ import { getAllUsers } from '@/lib/users';
 import { Suspense } from 'react';
 import { Greeting } from './Greeting';
 import { EventCard } from '@/components/EventCard';
+import { EventForm } from '@/components/EventForm';
 
 export default async function Home() {
   const data = await getAllUsers();
@@ -15,12 +16,13 @@ export default async function Home() {
       </Suspense>
       <div>
         <Greeting />
-        <EventCard
+        {/* <EventCard
           date="now"
           description="Будет весело"
           location="лучшее место на земле"
           title="Встреча"
-        />
+        /> */}
+        <EventForm />
       </div>
     </>
   );
