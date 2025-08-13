@@ -27,4 +27,24 @@ export const eventRouter = router({
 
       return user;
     }),
+
+  create: publicProcedure
+    .input(
+      z.object({
+        title: z.string().min(1, 'Введите название'),
+        description: z.string().min(1, 'Введите описание'),
+        date: z.string().min(1, 'Введите дату'),
+        authorId: z.string().min(1, 'Введите id автора'),
+      })
+    )
+    .mutation(async ({ input }) => {
+      return await prisma.event.create({
+        data: {
+          title: input.title,
+          description: input.description,
+          date: new Date(input.date), // Конвертируем строку в Date
+          authorId: parseInt(input.authorId, 10), // Конвертируем строку в число.authorId,
+        },
+      });
+    }),
 });
